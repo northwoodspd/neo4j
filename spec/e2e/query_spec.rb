@@ -486,34 +486,6 @@ describe 'Query API' do
       end
     end
 
-    describe 'multiple labels' do
-      before(:each) do
-        stub_active_node_class('GitHub')
-
-        stub_active_node_class('StackOverflow')
-
-        stub_named_class('GitHubUser', GitHub) do
-          self.mapped_label_name = 'User'
-        end
-
-        stub_named_class('StackOverflowUser', StackOverflow) do
-          self.mapped_label_name = 'User'
-        end
-      end
-
-      context 'one user each in GitHub and StackOverflow' do
-        before(:each) do
-          GitHubUser.create
-          StackOverflowUser.create
-        end
-
-        it 'Should only find one of each' do
-          expect(GitHubUser.count).to eq(1)
-          expect(StackOverflowUser.count).to eq(1)
-        end
-      end
-    end
-
     describe 'association chaining' do
       context 'othmar is teaching math 101' do
         before(:each) { othmar.lessons_teaching << math101 }

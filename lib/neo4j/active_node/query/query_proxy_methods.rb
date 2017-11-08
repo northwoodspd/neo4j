@@ -182,9 +182,7 @@ module Neo4j
         #   WHERE (node_var:Teacher:Person OR node_var:Article)
         def as_models(models)
           where_clause = models.map do |model|
-            "`#{identity}`:" + model.mapped_label_names.map do |mapped_label_name|
-              "`#{mapped_label_name}`"
-            end.join(':')
+            "`#{identity}`:`#{model.mapped_label_name}`"
           end.join(' OR ')
 
           where("(#{where_clause})")

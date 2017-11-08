@@ -701,6 +701,13 @@ describe 'query_proxy_methods' do
       end
     end
 
+    describe 'as_models' do
+      it 'uses the mapped label name for node in the where clause' do
+        query = Student.all.lessons.as_models([Lesson])
+        expect(query.to_cypher).to include('WHERE (`result_lessons`:`Lesson`)')
+      end
+    end
+
     describe 'delete, destroy' do
       before { @john.lessons << @history unless @john.lessons.include?(@history) }
 

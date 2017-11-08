@@ -119,7 +119,7 @@ module Neo4j
         # The @association_labels instance var is set during init and used during association chaining to keep labels out of Cypher queries.
         def _model_label_string(with_labels = true)
           return if !@model || (!with_labels || @association_labels == false)
-          @model.mapped_label_names.map { |label_name| ":`#{label_name}`" }.join
+          ":`#{@model.mapped_label_name}`"
         end
 
         # Scope all queries to the current scope.
